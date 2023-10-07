@@ -13,7 +13,7 @@ import {
   View,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import CombinedScreens from './screens/Combined screens/CombinedScreens';
+import CombinedScreens from './source/screens/Combined screen/CombinedScreens';
 
 const App = () => {
   return (

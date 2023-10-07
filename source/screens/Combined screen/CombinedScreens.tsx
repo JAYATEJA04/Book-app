@@ -15,7 +15,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProfileScreen from '../Profile screen/ProfileScreen';
 import SearchScreen from '../Search screen/SearchScreen';
 import ExploreScreen from '../Explore screen/ExploreScreen';
-import HomeScreen from '../HomeScreen/HomeScreen';
+import HomeScreen from '../Home screen/HomeScreen';
 import SessionScreen from '../Session screen/SessionScreen';
 import FeatherIcons from 'react-native-vector-icons/FontAwesome6';
 
