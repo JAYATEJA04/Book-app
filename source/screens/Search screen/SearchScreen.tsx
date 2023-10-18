@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
   ItemText: {
     fontSize: 15,
     fontWeight: '200',
+    color: 'black',
   },
 });
 
