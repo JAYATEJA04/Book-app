@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   },
   TitleText: {
     fontFamily: 'DancingScript-Bold',
-    fontSize: 30,
+    fontSize: 40,
     color: 'black',
   },
   InputView: {
