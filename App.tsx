@@ -14,11 +14,13 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import CombinedScreens from './source/screens/Combined screen/CombinedScreens';
+import LoginScreen from './source/screens/Login Screen/LoginScreen';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <CombinedScreens />
+      {/* <CombinedScreens /> */}
+      <LoginScreen />
     </NavigationContainer>
   );
 };
