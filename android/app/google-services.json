@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "861247721109",
+    "project_id": "my-book-app-ac5a5",
+    "storage_bucket": "my-book-app-ac5a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861247721109:android:44a81e2810dbf21249d59c",
+        "android_client_info": {
+          "package_name": "com.bookishapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-0lH2hYVuY81kcodwHYTsoVhNJu-KtLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
