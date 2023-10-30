@@ -7,21 +7,53 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import {JumpingTransition} from 'react-native-reanimated';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome6';
+import auth from '@react-native-firebase/auth';
+import {createStackNavigator} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
+import UserRegistration from './RegistrationScreen';
 
+const Stack = createStackNavigator();
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('screen').width;
-const screenHeight = Dimensions.get('screen').height;
 const oneFourthWindowHeight = windowHeight / 4;
 const effectiveWidth = windowWidth - 2 * 20;
+
+const StackedLoginScreen = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Login Screen" component={LoginScreen} />
+      <Stack.Screen
+        name="Forget Password Screen"
+        component={ForgetPasswordScreen}
+      />
+      <Stack.Screen name="Sign up screen" component={UserRegistration} />
+    </Stack.Navigator>
+  );
+};
+
+const ForgetPasswordScreen = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text style={{color: 'black', fontSize: 20}}>Forget password</Text>
+    </View>
+  );
+};
+
+const SignUpScreen = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text style={{color: 'black', fontSize: 20}}>Sign up screen</Text>
+    </View>
+  );
+};
 
 const LoginScreen = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [isInput1Focused, setIsInput1Focused] = useState(false);
   const [isInput2Focused, setIsInput2Focused] = useState(false);
+  const Navigation = useNavigation();
 
   const handleInput1Focus = () => {
     setIsInput1Focused(true);
@@ -39,6 +71,44 @@ const LoginScreen = () => {
     setIsInput2Focused(false);
   };
 
+  const userLogin = () => {
+    auth()
+      .signInWithEmailAndPassword(userName, password)
+      .then(() => {
+        console.log('User account created & signed in!');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
+
+  const userRegistration = () => {
+    auth()
+      .createUserWithEmailAndPassword(userName, password)
+      .then(() => {
+        console.log('User account has been created.');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.TitleView}>
@@ -54,6 +124,8 @@ const LoginScreen = () => {
           ]}>
           <TextInput
             placeholder="Username"
+            value={userName}
+            onChangeText={txt => setUserName(txt)}
             style={[
               styles.TextInput,
               isInput1Focused ? styles.FocusedInput : null,
@@ -65,6 +137,8 @@ const LoginScreen = () => {
         <View style={[styles.UserInputView, styles.BorderWidth]}>
           <TextInput
             placeholder="Password"
+            value={password}
+            onChangeText={pwd => setPassword(pwd)}
             style={[
               styles.TextInput,
               isInput2Focused ? styles.FocusedInput : null,
@@ -73,7 +147,9 @@ const LoginScreen = () => {
             onBlur={handleInput2Blur}
           />
           <View style={styles.ForgotPasswordView}>
-            <Text>Forgot password?</Text>
+            <Text onPress={() => Navigation.navigate('Forget Password Screen')}>
+              Forgot password?
+            </Text>
           </View>
         </View>
       </View>
@@ -159,7 +235,12 @@ const LoginScreen = () => {
           }}>
           <Text style={{fontSize: 15, color: 'black'}}>
             Don't have an account?
-            <Text style={{fontWeight: 'bold'}}> Sign up</Text>
+            <Text
+              style={{fontWeight: 'bold'}}
+              onPress={() => Navigation.navigate('Sign up screen')}>
+              {' '}
+              Sign up
+            </Text>
           </Text>
         </View>
       </View>
@@ -192,7 +273,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   TextInput: {
-    borderWidth: 1,
+    // borderWidth: 1,
     width: effectiveWidth,
     height: oneFourthWindowHeight / 4,
     borderRadius: 10,
@@ -258,4 +339,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default StackedLoginScreen;

@@ -22,8 +22,8 @@ const App = () => {
   return (
     <NavigationContainer>
       {/* <CombinedScreens /> */}
-      {/* <LoginScreen /> */}
-      <UserRegistration />
+      <LoginScreen />
+      {/* <UserRegistration /> */}
     </NavigationContainer>
   );
 };

@@ -7,8 +7,6 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import {JumpingTransition} from 'react-native-reanimated';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome6';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
