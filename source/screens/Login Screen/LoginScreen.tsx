@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   View,
+  ScrollView,
   Text,
   TextInput,
   StyleSheet,
@@ -11,7 +12,8 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome6';
 import auth from '@react-native-firebase/auth';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import UserRegistration from './RegistrationScreen';
+import StackedSignUpScreen from './RegistrationScreen';
+import CombinedScreens from '../Combined screen/CombinedScreens';
 
 const Stack = createStackNavigator();
 const windowWidth = Dimensions.get('window').width;
@@ -27,7 +29,8 @@ const StackedLoginScreen = () => {
         name="Forget Password Screen"
         component={ForgetPasswordScreen}
       />
-      <Stack.Screen name="Sign up screen" component={UserRegistration} />
+      <Stack.Screen name="Sign up screen" component={StackedSignUpScreen} />
+      <Stack.Screen name="CombinedScreen" component={CombinedScreens} />
     </Stack.Navigator>
   );
 };
@@ -40,19 +43,14 @@ const ForgetPasswordScreen = () => {
   );
 };
 
-const SignUpScreen = () => {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{color: 'black', fontSize: 20}}>Sign up screen</Text>
-    </View>
-  );
-};
-
 const LoginScreen = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [isInput1Focused, setIsInput1Focused] = useState(false);
   const [isInput2Focused, setIsInput2Focused] = useState(false);
+  const [emptyerror, setEmptyError] = useState('');
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
+  const [invalidCredentialError, setInvalidCredentialError] = useState('');
   const Navigation = useNavigation();
 
   const handleInput1Focus = () => {
@@ -76,6 +74,7 @@ const LoginScreen = () => {
       .signInWithEmailAndPassword(userName, password)
       .then(() => {
         console.log('User account created & signed in!');
+        Navigation.navigate('CombinedScreen');
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -86,31 +85,25 @@ const LoginScreen = () => {
           console.log('That email address is invalid!');
         }
 
-        console.error(error);
+        if (error.code === 'auth/invalid-login') {
+          setInvalidCredentialError(`Couldn't find the account`);
+          console.log(error);
+        }
+        // console.error(error);
       });
   };
 
-  const userRegistration = () => {
-    auth()
-      .createUserWithEmailAndPassword(userName, password)
-      .then(() => {
-        console.log('User account has been created.');
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
-
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-
-        console.error(error);
-      });
+  const handleLogin = () => {
+    if (!userName && !password) {
+      setEmptyError('Please enter username and password.');
+    } else {
+      userLogin();
+      setEmptyError('');
+    }
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.TitleView}>
         <Text style={styles.TitleText}>Books & Tales</Text>
       </View>
@@ -122,6 +115,11 @@ const LoginScreen = () => {
             {justifyContent: 'center'},
             styles.BorderWidth,
           ]}>
+          {invalidCredentialError && (
+            <Text style={{fontSize: 10, color: 'red'}}>
+              {invalidCredentialError}
+            </Text>
+          )}
           <TextInput
             placeholder="Username"
             value={userName}
@@ -159,9 +157,14 @@ const LoginScreen = () => {
         <View style={{height: oneFourthWindowHeight / 4}} />
         {/* button */}
         <View style={styles.LoginButtonView}>
-          <TouchableOpacity style={styles.LoginButtonStyle}>
+          <TouchableOpacity
+            style={styles.LoginButtonStyle}
+            onPress={() => handleLogin()}>
             <Text style={styles.LoginButtonText}>Login</Text>
           </TouchableOpacity>
+          {emptyerror && (
+            <Text style={{fontSize: 10, color: 'red'}}>{emptyerror}</Text>
+          )}
         </View>
         {/* or */}
         <View
@@ -244,7 +247,7 @@ const LoginScreen = () => {
           </Text>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
