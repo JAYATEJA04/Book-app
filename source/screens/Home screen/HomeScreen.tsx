@@ -6,12 +6,19 @@ import {
   ScrollView,
   StyleSheet,
   Pressable,
+  Image,
+  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const oneFourthWindowHeight = windowHeight / 4;
+const effectiveWidth = windowWidth - 2 * 20;
 const Stack = createStackNavigator();
+
 const HomeScreen = () => {
   return (
     <Stack.Navigator>
@@ -57,6 +64,42 @@ const HomeLayout = () => {
           <Pressable onPress={() => navigation.navigate('Notify')}>
             <Icon name="bell" color="black" size={25} solid />
           </Pressable>
+        </View>
+      </View>
+      <View
+        style={{
+          padding: 20,
+        }}>
+        <View style={{flexDirection: 'row'}}>
+          <View>
+            <Image
+              source={require('../../../assets/Photos/me.jpg')}
+              style={{height: 50, width: 50, borderRadius: 50}}
+            />
+          </View>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: 10,
+            }}>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                color: 'black',
+                fontFamily: 'OpenSans-SemiBold',
+                fontSize: 16,
+              }}>
+              Jaya Teja
+            </Text>
+          </View>
+        </View>
+        {/* written post example */}
+        <View style={{top: 10}}>
+          <Text style={{color: 'black', fontSize: 14}}>
+            Completed reading Shoe dog, have so many takeaways from the book.
+            Penned down a few here.
+          </Text>
         </View>
       </View>
     </View>
