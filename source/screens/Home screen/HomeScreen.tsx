@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -12,12 +12,19 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
+import SampleComponent from './SampleComponent';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const oneFourthWindowHeight = windowHeight / 4;
 const effectiveWidth = windowWidth - 2 * 20;
 const Stack = createStackNavigator();
+const HeartIcon = <Icon name="heart" size={30} color="red" />;
+const EmptyHeartIcon = <Icon name="heart" size={30} color="gray" />;
+const Comment = <Icon name="comment" size={30} color="red" />;
+const Filledcomment = <Icon name="comment" size={30} color="gray" />;
+const Share = <Icon name="share" size={30} />;
+const BookMark = <Icon name="bookmark" size={30} />;
 
 const HomeScreen = () => {
   return (
@@ -51,8 +58,9 @@ const CameraScreen = () => {
 
 const HomeLayout = () => {
   const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.MenuBar}>
         <View style={styles.BellIcon}>
           <Pressable onPress={() => navigation.navigate('Camera')}>
@@ -66,43 +74,12 @@ const HomeLayout = () => {
           </Pressable>
         </View>
       </View>
-      <View
-        style={{
-          padding: 20,
-        }}>
-        <View style={{flexDirection: 'row'}}>
-          <View>
-            <Image
-              source={require('../../../assets/Photos/me.jpg')}
-              style={{height: 50, width: 50, borderRadius: 50}}
-            />
-          </View>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginLeft: 10,
-            }}>
-            <Text
-              style={{
-                fontWeight: 'bold',
-                color: 'black',
-                fontFamily: 'OpenSans-SemiBold',
-                fontSize: 16,
-              }}>
-              Jaya Teja
-            </Text>
-          </View>
-        </View>
-        {/* written post example */}
-        <View style={{top: 10}}>
-          <Text style={{color: 'black', fontSize: 14}}>
-            Completed reading Shoe dog, have so many takeaways from the book.
-            Penned down a few here.
-          </Text>
-        </View>
-      </View>
-    </View>
+      <SampleComponent />
+      <SampleComponent />
+      <SampleComponent />
+      <SampleComponent />
+      <SampleComponent />
+    </ScrollView>
   );
 };
 
