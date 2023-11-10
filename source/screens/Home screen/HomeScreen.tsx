@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome6';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import SampleComponent from './SampleComponent';
+import CircularButton from './CircularButton';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -60,7 +61,7 @@ const HomeLayout = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.MenuBar}>
         <View style={styles.BellIcon}>
           <Pressable onPress={() => navigation.navigate('Camera')}>
@@ -74,12 +75,15 @@ const HomeLayout = () => {
           </Pressable>
         </View>
       </View>
-      <SampleComponent />
-      <SampleComponent />
-      <SampleComponent />
-      <SampleComponent />
-      <SampleComponent />
-    </ScrollView>
+      <ScrollView>
+        <SampleComponent />
+        <SampleComponent />
+        <SampleComponent />
+        <SampleComponent />
+        <SampleComponent />
+      </ScrollView>
+      <CircularButton />
+    </View>
   );
 };
 
@@ -111,6 +115,18 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     padding: 10,
     // borderWidth: 1,
+  },
+  ButtonContainer: {
+    backgroundColor: 'blue', // Button background color
+    borderRadius: 50, // Make it circular
+    width: 50, // Adjust width and height as needed
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute', // Position it wherever you need
+    bottom: 20,
+    right: 20,
+    elevation: 5,
   },
 });
 export default HomeScreen;

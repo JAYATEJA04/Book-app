@@ -8,22 +8,13 @@ import {
   Image,
   Button,
 } from 'react-native';
-import store, {decrement, increment} from './store';
-import {Provider} from 'react-redux';
-import {useSelector, useDispatch} from 'react-redux';
+import CircularButton from '../Home screen/CircularButton';
+import SampleComponent from '../Home screen/SampleComponent';
 
 const SessionScreen = () => {
-  const counter = useSelector(state => state.counter.value);
-  const dispatch = useDispatch();
-
   return (
     <View style={styles.container}>
-      <Text style={styles.Text}>hi, this where your session happens</Text>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text> Counter: {counter}</Text>
-        <Button title="Increment" onPress={() => dispatch(increment())} />
-        <Button title="Decrement" onPress={() => dispatch(decrement())} />
-      </View>
+      <CircularButton />
     </View>
   );
 };
@@ -37,6 +28,13 @@ const styles = StyleSheet.create({
   Text: {
     fontFamily: 'Montserrat-Bold',
     color: 'black',
+  },
+  Box: {
+    width: 100,
+    height: 100,
+    backgroundColor: 'violet',
+    borderRadius: 10,
+    marginVertical: 50,
   },
 });
 

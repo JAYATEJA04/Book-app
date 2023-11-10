@@ -22,15 +22,22 @@ const HeartIcon = <Icon name="heart" size={30} color="red" />;
 const EmptyHeartIcon = <Icon name="heart" size={30} color="gray" />;
 const Comment = <Icon name="comment" size={30} color="red" />;
 const Filledcomment = <Icon name="comment" size={30} color="gray" />;
-const Share = <Icon name="share" size={30} />;
-const BookMark = <Icon name="bookmark" size={30} />;
+const Share = <Icon name="share" size={30} color="gray" />;
+const BookMark = <Icon name="bookmark" size={30} color="gray" />;
 
 const SampleComponent = () => {
   const [liked, setLiked] = useState(false);
   const [comment, setComment] = useState(false);
+  const [likeCount, setLikeCount] = useState(100);
 
   const handleLike = () => {
-    setLiked(true);
+    if (liked) {
+      setLiked(false);
+      setLikeCount(likeCount - 1);
+    } else {
+      setLiked(true);
+      setLikeCount(likeCount + 1);
+    }
   };
 
   const handleComment = () => {
@@ -79,7 +86,7 @@ const SampleComponent = () => {
           </View>
           {/* for post text */}
           <View style={{padding: 10, flexWrap: 'nowrap'}}>
-            <Text>
+            <Text style={{color: 'grey'}}>
               "Shoe Dog" is Phil Knight's memoir, recounting the tumultuous
               journey of Nike's founding and rise to a global giant in
               sportswear. The book delves into the challenges, risks, and
@@ -104,15 +111,21 @@ const SampleComponent = () => {
           {/* for comment button */}
           <View style={{margin: 10}}>
             <TouchableOpacity onPress={handleComment}>
-              {comment ? Comment : Filledcomment}
+              {Filledcomment}
             </TouchableOpacity>
           </View>
           {/* for share button */}
           <View style={{margin: 10}}>
             <TouchableOpacity>{Share}</TouchableOpacity>
           </View>
-          <View style={{margin: 10}}>
-            <TouchableOpacity>{BookMark}</TouchableOpacity>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'flex-end',
+            }}>
+            <View style={{margin: 10}}>
+              <TouchableOpacity>{BookMark}</TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
