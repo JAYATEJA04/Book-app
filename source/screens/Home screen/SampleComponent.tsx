@@ -10,38 +10,24 @@ import {
   Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import FAIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
+import LikeButton from '../../Components/LikeButton';
+import CommentSection from '../../Components/CommentSection';
+import { Commands } from 'react-native-pager-view/lib/typescript/PagerViewNativeComponent';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const oneFourthWindowHeight = windowHeight / 4;
 const effectiveWidth = windowWidth - 2 * 20;
 const Stack = createStackNavigator();
-const HeartIcon = <Icon name="heart" size={30} color="red" />;
-const EmptyHeartIcon = <Icon name="heart" size={30} color="gray" />;
-const Comment = <Icon name="comment" size={30} color="red" />;
-const Filledcomment = <Icon name="comment" size={30} color="gray" />;
-const Share = <Icon name="share" size={30} color="gray" />;
-const BookMark = <Icon name="bookmark" size={30} color="gray" />;
 
 const SampleComponent = () => {
   const [liked, setLiked] = useState(false);
-  const [comment, setComment] = useState(false);
-  const [likeCount, setLikeCount] = useState(100);
 
   const handleLike = () => {
-    if (liked) {
-      setLiked(false);
-      setLikeCount(likeCount - 1);
-    } else {
-      setLiked(true);
-      setLikeCount(likeCount + 1);
-    }
-  };
-
-  const handleComment = () => {
-    setComment(true);
+    setLiked(!liked);
   };
 
   return (
@@ -104,19 +90,16 @@ const SampleComponent = () => {
         <View style={{flexDirection: 'row'}}>
           {/* for like button */}
           <View style={{margin: 10}}>
-            <TouchableOpacity onPress={handleLike}>
-              {liked ? HeartIcon : EmptyHeartIcon}
-            </TouchableOpacity>
+            <LikeButton />
           </View>
           {/* for comment button */}
           <View style={{margin: 10}}>
-            <TouchableOpacity onPress={handleComment}>
-              {Filledcomment}
-            </TouchableOpacity>
+            {/* <FAIcon name="comment-outline" size={30} color={'black'} /> */}
+            <CommentSection />
           </View>
           {/* for share button */}
           <View style={{margin: 10}}>
-            <TouchableOpacity>{Share}</TouchableOpacity>
+            <FAIcon name="share-outline" size={30} color={'black'} />
           </View>
           <View
             style={{
@@ -124,7 +107,7 @@ const SampleComponent = () => {
               alignItems: 'flex-end',
             }}>
             <View style={{margin: 10}}>
-              <TouchableOpacity>{BookMark}</TouchableOpacity>
+              <TouchableOpacity>{}</TouchableOpacity>
             </View>
           </View>
         </View>

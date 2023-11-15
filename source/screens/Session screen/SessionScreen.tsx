@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,14 +7,17 @@ import {
   StyleSheet,
   Image,
   Button,
+  Pressable,
 } from 'react-native';
-import CircularButton from '../Home screen/CircularButton';
-import SampleComponent from '../Home screen/SampleComponent';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import CommentSection from '../../Components/CommentSection';
 
 const SessionScreen = () => {
+  const [liked, setLiked] = useState(false);
+
   return (
-    <View style={styles.container}>
-      <CircularButton />
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <CommentSection />
     </View>
   );
 };
