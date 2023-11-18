@@ -38,7 +38,11 @@ const HomeScreen = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen name="Notify" component={NotificationScreen} />
-      <Stack.Screen name="Create" component={CreateTale} />
+      <Stack.Screen
+        name="Create"
+        component={CreateTale}
+        options={{headerShown: false}}
+      />
       <Stack.Screen name="Camera" component={CameraScreen} />
     </Stack.Navigator>
   );
