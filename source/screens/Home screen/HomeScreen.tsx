@@ -14,7 +14,8 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import SampleComponent from './SampleComponent';
-import CircularButton from './CircularButton';
+import CircularButton from '../../Components/CreatePostButton';
+import CreateTale from '../../Components/CreatePostScreen';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -37,6 +38,7 @@ const HomeScreen = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen name="Notify" component={NotificationScreen} />
+      <Stack.Screen name="Create" component={CreateTale} />
       <Stack.Screen name="Camera" component={CameraScreen} />
     </Stack.Navigator>
   );

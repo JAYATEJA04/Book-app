@@ -18,7 +18,7 @@ import ExploreScreen from '../Explore screen/ExploreScreen';
 import HomeScreen from '../Home screen/HomeScreen';
 import SessionScreen from '../Session screen/SessionScreen';
 import FeatherIcons from 'react-native-vector-icons/FontAwesome6';
-import CircularButton from '../Home screen/CircularButton';
+import CircularButton from '../../Components/CreatePostButton';
 
 const BottomTab = createBottomTabNavigator();
 const CombinedScreens = () => {
