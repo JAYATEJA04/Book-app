@@ -16,9 +16,11 @@ const oneFourthWindowHeight = windowHeight / 4;
 const effectiveWidth = windowWidth - 2 * 20;
 
 const CreateTale = () => {
-  const [textPost, setTextPost] = useState('');
+  const [textPost, setTextPost] = useState<string>('');
+  const [postButtonPressed, setPostButtonPressed] = useState<boolean>(false);
   const isButtonDisabled = textPost.length === 0;
 
+  const Navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.container2}>
@@ -30,7 +32,8 @@ const CreateTale = () => {
                 ? styles.postButtonDisabled
                 : styles.postButtonEnabled
             }
-            disabled={isButtonDisabled}>
+            disabled={isButtonDisabled}
+            onPress={() => Navigation.navigate('Home')}>
             <Text
               style={
                 isButtonDisabled
@@ -56,6 +59,7 @@ const CreateTale = () => {
               multiline
               value={textPost}
               onChangeText={txt => setTextPost(txt)}
+              placeholderTextColor={'grey'}
             />
           </View>
         </View>
@@ -90,6 +94,7 @@ const styles = StyleSheet.create({
   },
   taleText: {
     // flexWrap: 'wrap',
+    color: 'black',
     fontSize: 18,
   },
   borderBottom: {

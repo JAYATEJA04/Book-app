@@ -82,9 +82,9 @@ const SampleComponent = () => {
             </Text>
           </View>
           {/* for READ ME */}
-          <View style={{padding: 10}}>
+          {/* <View style={{padding: 10}}>
             <Text style={{color: '#39A7FF'}}>READ MORE</Text>
-          </View>
+          </View> */}
         </View>
         {/* for like, comment, share and bookmark */}
         <View style={{flexDirection: 'row'}}>
