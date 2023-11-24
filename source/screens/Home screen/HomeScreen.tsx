@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Pressable,
   Image,
+  FlatList,
   Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
@@ -14,8 +15,8 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import SampleComponent from './SampleComponent';
-import CircularButton from '../../Components/CreatePostButton';
-import CreateTale from '../../Components/CreatePostScreen';
+import CircularButton from '../../Components/HomeScreen/CreatePostButton';
+import CreateTale from '../../Components/HomeScreen/CreatePostScreen';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -65,6 +66,7 @@ const CameraScreen = () => {
 };
 
 const HomeLayout = () => {
+  const [posts, setPosts] = useState([]);
   const navigation = useNavigation();
 
   return (
@@ -83,10 +85,6 @@ const HomeLayout = () => {
         </View>
       </View>
       <ScrollView>
-        <SampleComponent />
-        <SampleComponent />
-        <SampleComponent />
-        <SampleComponent />
         <SampleComponent />
       </ScrollView>
       <CircularButton />

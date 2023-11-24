@@ -10,7 +10,7 @@ import {
   Pressable,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CommentSection from '../../Components/CommentSection';
+import CommentSection from '../../Components/HomeScreen/CommentSection';
 
 const SessionScreen = () => {
   const [liked, setLiked] = useState(false);

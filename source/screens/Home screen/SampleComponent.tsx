@@ -13,8 +13,8 @@ import Icon from 'react-native-vector-icons/FontAwesome6';
 import FAIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import LikeButton from '../../Components/LikeButton';
-import CommentSection from '../../Components/CommentSection';
+import LikeButton from '../../Components/HomeScreen/LikeButton';
+import CommentSection from '../../Components/HomeScreen/CommentSection';
 import { Commands } from 'react-native-pager-view/lib/typescript/PagerViewNativeComponent';
 
 const windowWidth = Dimensions.get('window').width;
