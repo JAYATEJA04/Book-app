@@ -17,6 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 import SampleComponent from './SampleComponent';
 import CircularButton from '../../Components/HomeScreen/CreatePostButton';
 import CreateTale from '../../Components/HomeScreen/CreatePostScreen';
+import PostTest from '../../Components/HomeScreen/PostTest';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -66,8 +67,16 @@ const CameraScreen = () => {
 };
 
 const HomeLayout = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<string[]>([]);
   const navigation = useNavigation();
+
+  const handleNewPostPress = () => {
+    navigation.navigate('Create', {
+      onPostSubmit: (postContent: string) => {
+        setPosts([...posts, postContent]);
+      },
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -84,10 +93,36 @@ const HomeLayout = () => {
           </Pressable>
         </View>
       </View>
-      <ScrollView>
-        <SampleComponent />
-      </ScrollView>
-      <CircularButton />
+      <FlatList
+        data={posts}
+        renderItem={({item}) => <CreateTale content={item} />}
+        keyExtractor={(item, index) => index.toString()}
+      />
+      <TouchableOpacity
+        onPress={handleNewPostPress}
+        style={{
+          position: 'absolute',
+          width: 60,
+          height: 60,
+          alignItems: 'center',
+          justifyContent: 'center',
+          right: 30,
+          bottom: 50,
+          elevation: 40,
+        }}>
+        <View
+          style={{
+            backgroundColor: 'blue',
+            borderRadius: 50,
+            width: 60,
+            height: 60,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          {/* <Text style={{color: 'white', fontSize: 20}}>+</Text> */}
+          <Icon name="pen-nib" size={30} color="white" />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
