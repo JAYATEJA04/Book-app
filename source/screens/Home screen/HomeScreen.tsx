@@ -71,11 +71,7 @@ const HomeLayout = () => {
   const navigation = useNavigation();
 
   const handleNewPostPress = () => {
-    navigation.navigate('Create', {
-      onPostSubmit: (postContent: string) => {
-        setPosts([...posts, postContent]);
-      },
-    });
+    navigation.navigate('Create');
   };
 
   return (

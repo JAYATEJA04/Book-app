@@ -13,19 +13,18 @@ import {useNavigation} from '@react-navigation/native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const oneFourthWindowHeight = windowHeight / 4;
-const effectiveWidth = windowWidth - 2 * 20;
 
 const CreateTale = ({route}) => {
-  const {onPostSubmit} = route.params;
   const [textPost, setTextPost] = useState<string>('');
   const [postButtonPressed, setPostButtonPressed] = useState<boolean>(false);
   const isButtonDisabled = textPost.length === 0;
 
+  const navigation = useNavigation();
+
   const handlePostButtonPress = () => {
-    onPostSubmit(textPost);
-    setTextPost('');
+    navigation.goBack();
   };
-  const Navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.container2}>

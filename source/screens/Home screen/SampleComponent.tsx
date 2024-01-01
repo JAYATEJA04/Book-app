@@ -15,7 +15,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import LikeButton from '../../Components/HomeScreen/LikeButton';
 import CommentSection from '../../Components/HomeScreen/CommentSection';
-import { Commands } from 'react-native-pager-view/lib/typescript/PagerViewNativeComponent';
+import {Commands} from 'react-native-pager-view/lib/typescript/PagerViewNativeComponent';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
