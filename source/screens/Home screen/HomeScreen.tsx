@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -66,13 +66,18 @@ const CameraScreen = () => {
   );
 };
 
-const HomeLayout = () => {
+const HomeLayout = ({route}) => {
   const [posts, setPosts] = useState<string[]>([]);
   const navigation = useNavigation();
 
   const handleNewPostPress = () => {
     navigation.navigate('Create');
   };
+
+  useEffect(() => {
+    if (route.params?.post) {
+    }
+  }, [route.params?.post]);
 
   return (
     <View style={styles.container}>
@@ -89,11 +94,14 @@ const HomeLayout = () => {
           </Pressable>
         </View>
       </View>
-      <FlatList
+      {/* <FlatList
         data={posts}
         renderItem={({item}) => <CreateTale content={item} />}
         keyExtractor={(item, index) => index.toString()}
-      />
+      /> */}
+      <View>
+        <Text>{route.params?.post}</Text>
+      </View>
       <TouchableOpacity
         onPress={handleNewPostPress}
         style={{

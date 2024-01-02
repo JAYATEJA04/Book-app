@@ -16,14 +16,9 @@ const oneFourthWindowHeight = windowHeight / 4;
 
 const CreateTale = ({route}) => {
   const [textPost, setTextPost] = useState<string>('');
-  const [postButtonPressed, setPostButtonPressed] = useState<boolean>(false);
   const isButtonDisabled = textPost.length === 0;
 
   const navigation = useNavigation();
-
-  const handlePostButtonPress = () => {
-    navigation.goBack();
-  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +32,13 @@ const CreateTale = ({route}) => {
                 : styles.postButtonEnabled
             }
             disabled={isButtonDisabled}
-            onPress={() => handlePostButtonPress()}>
+            onPress={() =>
+              navigation.navigate({
+                name: 'Home',
+                params: {post: textPost},
+                mere: true,
+              })
+            }>
             <Text
               style={
                 isButtonDisabled
